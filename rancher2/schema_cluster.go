@@ -421,6 +421,15 @@ func clusterFields() map[string]*schema.Schema {
 				Schema: clusterOKEConfigFields(),
 			},
 		},
+		"imported_config": {
+			Type:          schema.TypeList,
+			MaxItems:      1,
+			Optional:      true,
+			ConflictsWith: []string{"aks_config", "aks_config_v2", "eks_config", "eks_config_v2", "gke_config", "gke_config_v2", "k3s_config", "rke_config", "rke2_config", "oke_config"},
+			Elem: &schema.Resource{
+				Schema: clusterImportedConfigFields(),
+			},
+		},
 		"default_project_id": {
 			Type:     schema.TypeString,
 			Computed: true,
